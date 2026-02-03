@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리 name 어머님! 생신 축하합니다! 🎂</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎂</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .title {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .cake-container {
+            margin: 3rem auto;
+            position: relative;
+        }
+
+        .cake {
+            width: 300px;
+            height: 350px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .layer-bottom {
+            width: 250px;
+            height: 100px;
+            background: #8B4513;
+            border-radius: 10px;
+            bottom: 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .layer-middle {
+            width: 200px;
+            height: 80px;
+            background: #A0522D;
+            border-radius: 10px;
+            bottom: 100px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .layer-top {
+            width: 150px;
+            height: 70px;
+            background: #8B4513;
+            border-radius: 10px;
+            bottom: 180px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .frosting {
+            position: absolute;
+            height: 20px;
+            background: #FFF;
+            border-radius: 50%;
+            top: -10px;
+            left: 0;
+            right: 0;
+        }
+
+        .frosting::before,
+        .frosting::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background: #FFF;
+            border-radius: 50%;
+            top: 0;
+        }
+
+        .frosting::before {
+            left: -10px;
+        }
+
+        .frosting::after {
+            right: -10px;
+        }
+
+        .candles {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .candle {
+            width: 10px;
+            height: 50px;
+            background: linear-gradient(to bottom, #FF6B6B, #FFE66D);
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .flame {
+            width: 15px;
+            height: 20px;
+            background: #FFA500;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.5s ease-in-out infinite alternate;
+        }
+
+        .flame::after {
+            content: '';
+            width: 8px;
+            height: 12px;
+            background: #FFD700;
+            border-radius: 50%;
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scaleY(1); }
+            100% { transform: translateX(-50%) scaleY(1.1); }
+        }
+
+        .decorations {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-around;
+            padding: 0 10px;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            background: #FF1493;
+            border-radius: 50%;
+        }
+
+        .message {
+            margin-top: 3rem;
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 폭죽 애니메이션 */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            top: -10px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .confetti:nth-child(odd) {
+            background: #ff0;
+        }
+
+        .confetti:nth-child(3n) {
+            background: #0ff;
+        }
+
+        .confetti:nth-child(4n) {
+            background: #f00;
+        }
+
+        .confetti:nth-child(5n) {
+            background: #0f0;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .cake {
+                transform: scale(0.8);
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🎉 HAPPY BIRTHDAY!!!! 🎉</h1>
+        
+        <div class="cake-container">
+            <div class="cake">
+                <div class="layer layer-top">
+                    <div class="frosting"></div>
+                    <div class="candles">
+                        <div class="candle">
+                            <div class="flame"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="flame"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="flame"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layer layer-middle">
+                    <div class="frosting"></div>
+                    <div class="decorations">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                <div class="layer layer-bottom">
+                    <div class="frosting"></div>
+                    <div class="decorations">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="message">
+            사랑하는 우리 <name>name</name> 어머님!, 생신을 진심으로 축하드립니다! ❤️<br>
+            항상 건강하시고 행복하시고 오래오래 장수하세요~! 🌸
+        </p>
+    </div>
+
+    <script>
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+
+        setInterval(createConfetti, 200);
+
+        for (let i = 0; i < 50; i++) {
+            setTimeout(createConfetti, i * 100);
+        }
+    </script>
+</body>
+</html>
