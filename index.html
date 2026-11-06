@@ -256,6 +256,12 @@
                 margin-top: 2rem;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .title, .flame, .message, .confetti {
+                animation: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -308,9 +314,14 @@
     </div>
 
     <script>
+        const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
         const confettiLayer = document.querySelector('.confetti-layer');
+        const startupTimers = new Set();
+        let confettiInterval = null;
 
         function createConfetti() {
+            if (motionPreference.matches) return;
+
             const confetti = document.createElement('div');
             confetti.classList.add('confetti');
             confetti.style.left = Math.random() * 100 + 'vw';
@@ -323,10 +334,29 @@
             }, 5000);
         }
 
-        setInterval(createConfetti, 200);
+        function updateMotion() {
+            if (motionPreference.matches) {
+                clearInterval(confettiInterval);
+                confettiInterval = null;
+                startupTimers.forEach(clearTimeout);
+                startupTimers.clear();
+                confettiLayer.replaceChildren();
+            } else if (confettiInterval === null) {
+                confettiInterval = setInterval(createConfetti, 200);
+            }
+        }
 
-        for (let i = 0; i < 50; i++) {
-            setTimeout(createConfetti, i * 100);
+        motionPreference.addEventListener('change', updateMotion);
+        updateMotion();
+
+        if (!motionPreference.matches) {
+            for (let i = 0; i < 50; i++) {
+                const timer = setTimeout(() => {
+                    startupTimers.delete(timer);
+                    createConfetti();
+                }, i * 100);
+                startupTimers.add(timer);
+            }
         }
     </script>
 </body>
